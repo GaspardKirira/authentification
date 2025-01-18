@@ -1,0 +1,226 @@
+1. Controllers
+   Les contrôleurs gèrent la logique des requêtes HTTP. Ils reçoivent les demandes des utilisateurs, interagissent avec les services (qui gèrent la logique métier), et renvoient les réponses appropriées.
+
+Méthodes typiques dans un contrôleur :
+
+POST /users/register : Inscrire un nouvel utilisateur en validant les données envoyées (email, mot de passe, etc.).
+POST /users/login : Authentifier l'utilisateur avec ses informations (email et mot de passe) et générer un token JWT si la connexion est réussie.
+GET /users/me : Récupérer les informations de l'utilisateur authentifié (en utilisant le token JWT pour l'identifier).
+PUT /users/me : Mettre à jour les informations personnelles de l'utilisateur connecté (par exemple, changer le mot de passe).
+GET /articles : Récupérer tous les articles, potentiellement avec des paramètres de filtrage et de pagination.
+POST /articles : Créer un nouvel article en vérifiant que l'utilisateur est connecté et a les droits nécessaires.
+PUT /articles/:id : Modifier un article existant, après vérification des droits de l'utilisateur (auteur ou admin).
+DELETE /articles/:id : Supprimer un article, après validation de l'utilisateur.
+
+2. Models
+   Les modèles représentent les entités de l'application (comme les utilisateurs et les articles) et contiennent les méthodes permettant d'interagir avec la base de données. Ils définissent également la structure des données.
+
+Méthodes typiques dans un modèle :
+
+UserModel :
+createUser() : Créer un nouvel utilisateur dans la base de données.
+findUserByEmail() : Trouver un utilisateur via son email.
+comparePassword() : Comparer un mot de passe donné avec un mot de passe haché dans la base.
+ArticleModel :
+createArticle() : Créer un article dans la base de données.
+findArticleById() : Récupérer un article par son identifiant.
+updateArticle() : Mettre à jour un article existant.
+deleteArticle() : Supprimer un article de la base de données.
+
+3. Routes
+   Les routes définissent la correspondance entre les URL et les méthodes HTTP. Elles permettent de diriger les requêtes vers le bon contrôleur.
+
+Méthodes typiques dans un fichier de route :
+
+GET /users : Route qui appelle la méthode du contrôleur pour récupérer un utilisateur.
+POST /articles : Route qui appelle la méthode du contrôleur pour créer un nouvel article.
+PUT /articles/:id : Route qui appelle la méthode du contrôleur pour modifier un article spécifique.
+DELETE /articles/:id : Route pour supprimer un article spécifique.
+Les routes sont souvent définies avec un gestionnaire de routeur comme Express (Node.js).
+
+4. Middleware
+   Les middlewares sont des fonctions qui s'exécutent entre la réception de la requête HTTP et l'envoi de la réponse. Ils sont utilisés pour des tâches comme l'authentification, la gestion des erreurs, ou la validation.
+
+Méthodes typiques dans un middleware :
+
+authMiddleware :
+
+checkAuth() : Vérifie la présence d'un token JWT dans l'en-tête de la requête. Si le token est valide, l'utilisateur est autorisé à continuer ; sinon, la requête est rejetée.
+Ce middleware est utilisé pour sécuriser les routes qui nécessitent que l'utilisateur soit connecté.
+errorHandlingMiddleware : Gère les erreurs globales de l'application en renvoyant une réponse structurée en cas d'erreur.
+
+Voici une explication détaillée des méthodes et responsabilités de chaque composant mentionné dans l'architecture backend pour gérer les utilisateurs et les articles.
+
+1. Controllers
+   Les contrôleurs gèrent la logique des requêtes HTTP. Ils reçoivent les demandes des utilisateurs, interagissent avec les services (qui gèrent la logique métier), et renvoient les réponses appropriées.
+
+Méthodes typiques dans un contrôleur :
+
+POST /users/register : Inscrire un nouvel utilisateur en validant les données envoyées (email, mot de passe, etc.).
+POST /users/login : Authentifier l'utilisateur avec ses informations (email et mot de passe) et générer un token JWT si la connexion est réussie.
+GET /users/me : Récupérer les informations de l'utilisateur authentifié (en utilisant le token JWT pour l'identifier).
+PUT /users/me : Mettre à jour les informations personnelles de l'utilisateur connecté (par exemple, changer le mot de passe).
+GET /articles : Récupérer tous les articles, potentiellement avec des paramètres de filtrage et de pagination.
+POST /articles : Créer un nouvel article en vérifiant que l'utilisateur est connecté et a les droits nécessaires.
+PUT /articles/:id : Modifier un article existant, après vérification des droits de l'utilisateur (auteur ou admin).
+DELETE /articles/:id : Supprimer un article, après validation de l'utilisateur. 2. Models
+Les modèles représentent les entités de l'application (comme les utilisateurs et les articles) et contiennent les méthodes permettant d'interagir avec la base de données. Ils définissent également la structure des données.
+
+Méthodes typiques dans un modèle :
+
+UserModel :
+createUser() : Créer un nouvel utilisateur dans la base de données.
+findUserByEmail() : Trouver un utilisateur via son email.
+comparePassword() : Comparer un mot de passe donné avec un mot de passe haché dans la base.
+ArticleModel :
+createArticle() : Créer un article dans la base de données.
+findArticleById() : Récupérer un article par son identifiant.
+updateArticle() : Mettre à jour un article existant.
+deleteArticle() : Supprimer un article de la base de données. 3. Routes
+Les routes définissent la correspondance entre les URL et les méthodes HTTP. Elles permettent de diriger les requêtes vers le bon contrôleur.
+
+Méthodes typiques dans un fichier de route :
+
+GET /users : Route qui appelle la méthode du contrôleur pour récupérer un utilisateur.
+POST /articles : Route qui appelle la méthode du contrôleur pour créer un nouvel article.
+PUT /articles/:id : Route qui appelle la méthode du contrôleur pour modifier un article spécifique.
+DELETE /articles/:id : Route pour supprimer un article spécifique.
+Les routes sont souvent définies avec un gestionnaire de routeur comme Express (Node.js).
+
+4. Middleware
+   Les middlewares sont des fonctions qui s'exécutent entre la réception de la requête HTTP et l'envoi de la réponse. Ils sont utilisés pour des tâches comme l'authentification, la gestion des erreurs, ou la validation.
+
+Méthodes typiques dans un middleware :
+
+authMiddleware :
+
+checkAuth() : Vérifie la présence d'un token JWT dans l'en-tête de la requête. Si le token est valide, l'utilisateur est autorisé à continuer ; sinon, la requête est rejetée.
+Ce middleware est utilisé pour sécuriser les routes qui nécessitent que l'utilisateur soit connecté.
+errorHandlingMiddleware : Gère les erreurs globales de l'application en renvoyant une réponse structurée en cas d'erreur.
+
+5. Services
+   Les services contiennent la logique métier de l'application. Ils traitent les requêtes provenant des contrôleurs, interagissent avec les modèles et retournent des résultats.
+
+Méthodes typiques dans un service :
+
+UserService :
+
+registerUser() : Traite l'inscription d'un utilisateur, y compris la validation des données, le hachage du mot de passe et l'enregistrement dans la base de données.
+loginUser() : Gère la connexion de l'utilisateur en validant les informations d'identification et en générant un token JWT.
+ArticleService :
+
+createArticle() : Traite la création d'un nouvel article, en s'assurant que l'utilisateur est bien l'auteur.
+updateArticle() : Modifie un article existant après validation des droits de l'utilisateur.
+deleteArticle() : Supprime un article, en vérifiant que l'utilisateur est l'auteur ou a des privilèges administratifs.
+
+6. Validators
+   Les validateurs sont responsables de la validation des données d'entrée pour s'assurer qu'elles respectent un format et des règles prédéfinis (par exemple, vérifier si un email est valide ou si un mot de passe est suffisamment sécurisé).
+
+Méthodes typiques dans un validateur :
+
+userValidator :
+validateEmail() : Vérifie que l'email est valide (par exemple, qu'il a un format correct).
+validatePassword() : Vérifie que le mot de passe respecte les critères de sécurité (longueur, complexité, etc.).
+articleValidator :
+validateTitle() : Vérifie que le titre de l'article est suffisamment long et non vide.
+validateContent() : Vérifie que le contenu de l'article n'est pas vide et respecte les règles de formatage.
+
+Voici une explication détaillée des méthodes et responsabilités de chaque composant mentionné dans l'architecture backend pour gérer les utilisateurs et les articles.
+
+1. Controllers
+   Les contrôleurs gèrent la logique des requêtes HTTP. Ils reçoivent les demandes des utilisateurs, interagissent avec les services (qui gèrent la logique métier), et renvoient les réponses appropriées.
+
+Méthodes typiques dans un contrôleur :
+
+POST /users/register : Inscrire un nouvel utilisateur en validant les données envoyées (email, mot de passe, etc.).
+POST /users/login : Authentifier l'utilisateur avec ses informations (email et mot de passe) et générer un token JWT si la connexion est réussie.
+GET /users/me : Récupérer les informations de l'utilisateur authentifié (en utilisant le token JWT pour l'identifier).
+PUT /users/me : Mettre à jour les informations personnelles de l'utilisateur connecté (par exemple, changer le mot de passe).
+GET /articles : Récupérer tous les articles, potentiellement avec des paramètres de filtrage et de pagination.
+POST /articles : Créer un nouvel article en vérifiant que l'utilisateur est connecté et a les droits nécessaires.
+PUT /articles/:id : Modifier un article existant, après vérification des droits de l'utilisateur (auteur ou admin).
+DELETE /articles/:id : Supprimer un article, après validation de l'utilisateur. 2. Models
+Les modèles représentent les entités de l'application (comme les utilisateurs et les articles) et contiennent les méthodes permettant d'interagir avec la base de données. Ils définissent également la structure des données.
+
+Méthodes typiques dans un modèle :
+
+UserModel :
+createUser() : Créer un nouvel utilisateur dans la base de données.
+findUserByEmail() : Trouver un utilisateur via son email.
+comparePassword() : Comparer un mot de passe donné avec un mot de passe haché dans la base.
+ArticleModel :
+createArticle() : Créer un article dans la base de données.
+findArticleById() : Récupérer un article par son identifiant.
+updateArticle() : Mettre à jour un article existant.
+deleteArticle() : Supprimer un article de la base de données. 3. Routes
+Les routes définissent la correspondance entre les URL et les méthodes HTTP. Elles permettent de diriger les requêtes vers le bon contrôleur.
+
+Méthodes typiques dans un fichier de route :
+
+GET /users : Route qui appelle la méthode du contrôleur pour récupérer un utilisateur.
+POST /articles : Route qui appelle la méthode du contrôleur pour créer un nouvel article.
+PUT /articles/:id : Route qui appelle la méthode du contrôleur pour modifier un article spécifique.
+DELETE /articles/:id : Route pour supprimer un article spécifique.
+Les routes sont souvent définies avec un gestionnaire de routeur comme Express (Node.js).
+
+4. Middleware
+   Les middlewares sont des fonctions qui s'exécutent entre la réception de la requête HTTP et l'envoi de la réponse. Ils sont utilisés pour des tâches comme l'authentification, la gestion des erreurs, ou la validation.
+
+Méthodes typiques dans un middleware :
+
+authMiddleware :
+
+checkAuth() : Vérifie la présence d'un token JWT dans l'en-tête de la requête. Si le token est valide, l'utilisateur est autorisé à continuer ; sinon, la requête est rejetée.
+Ce middleware est utilisé pour sécuriser les routes qui nécessitent que l'utilisateur soit connecté.
+errorHandlingMiddleware : Gère les erreurs globales de l'application en renvoyant une réponse structurée en cas d'erreur.
+
+5. Services
+   Les services contiennent la logique métier de l'application. Ils traitent les requêtes provenant des contrôleurs, interagissent avec les modèles et retournent des résultats.
+
+Méthodes typiques dans un service :
+
+UserService :
+
+registerUser() : Traite l'inscription d'un utilisateur, y compris la validation des données, le hachage du mot de passe et l'enregistrement dans la base de données.
+loginUser() : Gère la connexion de l'utilisateur en validant les informations d'identification et en générant un token JWT.
+ArticleService :
+
+createArticle() : Traite la création d'un nouvel article, en s'assurant que l'utilisateur est bien l'auteur.
+updateArticle() : Modifie un article existant après validation des droits de l'utilisateur.
+deleteArticle() : Supprime un article, en vérifiant que l'utilisateur est l'auteur ou a des privilèges administratifs. 6. Validators
+Les validateurs sont responsables de la validation des données d'entrée pour s'assurer qu'elles respectent un format et des règles prédéfinis (par exemple, vérifier si un email est valide ou si un mot de passe est suffisamment sécurisé).
+
+Méthodes typiques dans un validateur :
+
+userValidator :
+validateEmail() : Vérifie que l'email est valide (par exemple, qu'il a un format correct).
+validatePassword() : Vérifie que le mot de passe respecte les critères de sécurité (longueur, complexité, etc.).
+articleValidator :
+validateTitle() : Vérifie que le titre de l'article est suffisamment long et non vide.
+validateContent() : Vérifie que le contenu de l'article n'est pas vide et respecte les règles de formatage. 7. Config
+Le dossier config contient les configurations de l'application, telles que les paramètres de la base de données, les clés API, ou d'autres services externes utilisés par l'application.
+
+Méthodes typiques dans un fichier de config :
+
+dbConfig.js : Contient la configuration de la base de données (URL, identifiants de connexion, etc.).
+appConfig.js : Contient des paramètres généraux pour l'application (comme la clé secrète pour signer les tokens JWT).
+
+8. Utils
+   Les utilitaires sont des fonctions ou classes réutilisables qui accomplissent des tâches courantes dans l'application, comme le hachage des mots de passe ou la gestion des tokens JWT.
+
+Méthodes typiques dans un utilitaire :
+
+hashUtils :
+hashPassword() : Hache un mot de passe avec un algorithme sécurisé (comme bcrypt).
+comparePassword() : Compare un mot de passe donné avec un mot de passe haché pour vérifier la correspondance.
+jwtUtils :
+generateToken() : Génère un token JWT à partir de l'ID utilisateur et d'autres informations.
+verifyToken() : Vérifie un token JWT pour valider l'authentification de l'utilisateur.
+
+9. Errors
+   Le dossier errors contient la gestion des erreurs personnalisées de l'application. Il est utilisé pour standardiser la manière dont les erreurs sont traitées et renvoyées.
+
+Méthodes typiques pour la gestion des erreurs :
+
+errorHandler.js : Cette fonction intercepte les erreurs non gérées dans l'application, les formate de manière cohérente (par exemple, en renvoyant un message JSON d'erreur), et les transmet au client.
+CustomError : Classe personnalisée pour créer des erreurs spécifiques (par exemple, NotFoundError, ValidationError), ce qui permet de mieux gérer les erreurs en fonction du type d'erreur rencontré.

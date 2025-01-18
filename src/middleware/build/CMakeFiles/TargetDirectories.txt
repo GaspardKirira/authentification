@@ -1,0 +1,3 @@
+/home/softadastra/Documents/cpp/auth/middleware/build/CMakeFiles/prog.dir
+/home/softadastra/Documents/cpp/auth/middleware/build/CMakeFiles/edit_cache.dir
+/home/softadastra/Documents/cpp/auth/middleware/build/CMakeFiles/rebuild_cache.dir

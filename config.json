@@ -1,0 +1,11 @@
+{
+    "database": {
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "name": "adastra_db"
+    },
+    "server": {
+        "port": 3606
+    }
+}

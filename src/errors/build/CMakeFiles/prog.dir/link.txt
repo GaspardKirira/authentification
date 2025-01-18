@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Wextra -Weffc++ -g -fsanitize=address  -fsanitize=address CMakeFiles/prog.dir/main.cpp.o CMakeFiles/prog.dir/ErrorHandler.cpp.o -o prog  -lboost_system -lpthread 
