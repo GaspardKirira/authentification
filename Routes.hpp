@@ -1,3 +1,6 @@
+#ifndef ROUTES_HPP
+#define ROUTES_HPP
+
 #include <boost/beast.hpp>
 #include <boost/asio.hpp>
 #include <boost/beast/http.hpp>
@@ -71,7 +74,11 @@ private:
             sql::Connection *con = config_.getDbConnection();
             if (con)
             {
+
                 sql::Statement *stmt = con->createStatement();
+
+                stmt->execute("CREATE TABLE IF NOT EXISTS users (id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(100));");
+
                 sql::ResultSet *res = stmt->executeQuery("SELECT * FROM users LIMIT 1");
 
                 std::string response_body = "User info:\n";
@@ -111,3 +118,5 @@ private:
     net::ip::tcp::acceptor acceptor_;
     Config &config_; // Référence à la configuration
 };
+
+#endif // Routes

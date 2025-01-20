@@ -1,8 +1,11 @@
+#ifndef CONFIG_HPP
+#define CONFIG_HPP
+
 #include <mysql_driver.h>
 #include <mysql_connection.h>
 #include <iostream>
 #include <fstream>
-#include <json/json.h> // Utilisation de la bibliothèque JSON pour configurer les paramètres
+#include <json/json.h> 
 
 class Config
 {
@@ -63,3 +66,5 @@ private:
     std::string db_name;
     int server_port;
 };
+
+#endif // CONFIG_HPP

@@ -1,0 +1,9 @@
+g++ -std=c++17 -o http main.cpp -I/usr/include -L/usr/lib -lboost_system -lboost_thread -pthread
+
+g++ -o main main.cpp -lcurlpp -lcurl -Wl,-rpath,/usr/local/lib
+
+ g++ -o main main.cpp -lcurlpp -lcurl -ljsoncpp -I./matplotlib-cpp -I$(python3 -c "import numpy; print(numpy.get_include())") -I$(python3 -c "from sysconfig import get_paths; print(get_paths()['include'])") -I$(python3 -c "import matplotlib; print(matplotlib.get_data_path())") -L/home/softadastra/.pyenv/versions/3.9.9/lib -lpython3.9 -Wl,-rpath,/home/softadastra/.pyenv/versions/3.9.9/lib -w
+
+
+
+  g++ -std=c++17 -o server main.cpp -I/usr/include -L/usr/lib -lboost_system -lboost_thread -lboost_filesystem -lmysqlcppconn -ljsoncpp -pthread
